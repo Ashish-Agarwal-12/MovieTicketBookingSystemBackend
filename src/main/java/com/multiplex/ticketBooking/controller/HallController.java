@@ -37,5 +37,4 @@ public class HallController {
     public void deleteHall(@PathVariable Long id) {
         hallServie.deleteHall(id);
     }
-
 }

@@ -1,6 +1,8 @@
 package com.multiplex.ticketBooking.controller;
 
 import com.multiplex.ticketBooking.entity.User;
+import com.multiplex.ticketBooking.exception.UserNotCreatedException;
+import com.multiplex.ticketBooking.exception.UserNotFoundException;
 import com.multiplex.ticketBooking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +15,12 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/createUser")
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public User createUser(@RequestBody User user) throws UserNotCreatedException {
+        User checkUser =  userService.createUser(user);
+        if(checkUser == null){
+            throw new UserNotCreatedException("Entered User Couldn't be Created");
+        }
+        return checkUser;
     }
 
     @GetMapping("/getAllUsers")
@@ -23,8 +29,12 @@ public class UserController {
     }
 
     @GetMapping("/getUserById/{id}")
-    public User getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
+    public User getUserById(@PathVariable Long id) throws UserNotFoundException {
+        User checkUser = userService.getUserById(id);
+        if(checkUser == null){
+            throw new UserNotFoundException("Entered User doesn't exist");
+        }
+        return checkUser;
     }
 
     @PutMapping("/updateUserById/{id}")

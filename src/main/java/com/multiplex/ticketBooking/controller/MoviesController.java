@@ -1,6 +1,8 @@
 package com.multiplex.ticketBooking.controller;
 
 import com.multiplex.ticketBooking.entity.Movies;
+import com.multiplex.ticketBooking.exception.MovieNotCreatedException;
+import com.multiplex.ticketBooking.exception.MovieNotFoundException;
 import com.multiplex.ticketBooking.service.MoviesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +15,12 @@ public class MoviesController {
     private MoviesService moviesService;
 
     @PostMapping("/addMovie")
-    public Movies addMovie(@RequestBody Movies movie){
-        return moviesService.addMovie(movie);
+    public Movies addMovie(@RequestBody Movies movie) throws MovieNotCreatedException {
+        Movies createMovie = moviesService.addMovie(movie);
+        if(createMovie == null){
+            throw new MovieNotCreatedException("This Movie could not be created");
+        }
+        return createMovie;
     }
 
     @GetMapping("/getAllMovies")
@@ -38,10 +44,11 @@ public class MoviesController {
     }
 
     @GetMapping("/searchMovieByName")
-    public List<Movies> searchMovieByName(@RequestParam("title") String movieName){
+    public List<Movies> searchMovieByName(@RequestParam("title") String movieName) throws MovieNotFoundException {
         List<Movies> moviesList = moviesService.searchMovieByName(movieName);
         if(moviesList.size() == 0){
-            //throw new MovieNotFoundException("")
+            //Throwing MovieNotFoundException
+            throw new MovieNotFoundException("Movie doesn't exist.");
         }
         return moviesList;
     }

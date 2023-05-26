@@ -1,8 +1,6 @@
 package com.multiplex.ticketBooking.handler;
 
-import com.multiplex.ticketBooking.exception.MovieNotFoundException;
-import com.multiplex.ticketBooking.exception.UserNotCreatedException;
-import com.multiplex.ticketBooking.exception.UserNotFoundException;
+import com.multiplex.ticketBooking.exception.*;
 import com.multiplex.ticketBooking.handlerEntity.ErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,4 +41,20 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     }
 
+    @ExceptionHandler(MovieNotCreatedException.class)
+    public ResponseEntity<ErrorMessage> movieNotCreatedException(MovieNotCreatedException exception, WebRequest webRequest){
+
+        ErrorMessage errorMessage = new ErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(errorMessage);
+
+    }
+
+    @ExceptionHandler(SlotNotFoundException.class)
+    public ResponseEntity<ErrorMessage> slotNotFoundException(SlotNotFoundException exception, WebRequest webRequest){
+
+        ErrorMessage errorMessage = new ErrorMessage(HttpStatus.NOT_FOUND, exception.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(errorMessage);
+    }
 }

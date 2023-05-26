@@ -3,6 +3,7 @@ package com.multiplex.ticketBooking.serviceImpl;
 import com.multiplex.ticketBooking.entity.Movies;
 import com.multiplex.ticketBooking.entity.Slot;
 import com.multiplex.ticketBooking.entity.Hall;
+import com.multiplex.ticketBooking.exception.SlotNotFoundException;
 import com.multiplex.ticketBooking.repository.HallRepository;
 import com.multiplex.ticketBooking.repository.MoviesRepository;
 import com.multiplex.ticketBooking.repository.SlotRepository;
@@ -29,8 +30,12 @@ public class slotServiceImpl implements SlotService {
     }
 
     @Override
-    public Slot getSlotsById(Long id) {
-        return slotRepository.findById(id).get();
+    public Slot getSlotsById(Long id) throws SlotNotFoundException {
+        Slot checkSlot =  slotRepository.findById(id).get();
+        if(checkSlot == null) {
+            throw new SlotNotFoundException("No such slot mapped through this ID");
+        }
+        return checkSlot;
     }
 
     @Override

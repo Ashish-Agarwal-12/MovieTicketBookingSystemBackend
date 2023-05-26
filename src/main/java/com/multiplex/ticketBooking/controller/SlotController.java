@@ -1,6 +1,7 @@
 package com.multiplex.ticketBooking.controller;
 
 import com.multiplex.ticketBooking.entity.Slot;
+import com.multiplex.ticketBooking.exception.SlotNotFoundException;
 import com.multiplex.ticketBooking.service.SlotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class SlotController {
     }
 
     @GetMapping("/getSlotById/{id}")
-    public Slot getSlotsById(@PathVariable Long id) {
+    public Slot getSlotsById(@PathVariable Long id) throws SlotNotFoundException {
         return slotService.getSlotsById(id);
     }
 
