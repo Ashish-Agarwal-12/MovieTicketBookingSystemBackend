@@ -2,6 +2,7 @@ package com.multiplex.ticketBooking.controller;
 
 import com.multiplex.ticketBooking.entity.Ticket;
 import com.multiplex.ticketBooking.service.TicketService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +18,7 @@ public class TicketController {
     private TicketService ticketService;
 
     @GetMapping("/getAllTicketsByUserName")
-    public List<Ticket> getAllTicketsByUserName(@RequestParam("userName") String userName){
+    public List<Ticket> getAllTicketsByUserName(@Valid @RequestParam("userName") String userName){
         List<Ticket> tickets = ticketService.getAllTicketsByUserName(userName);
         if (tickets.isEmpty()){
             return null; //throw no tickets with this username

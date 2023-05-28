@@ -3,6 +3,7 @@ package com.multiplex.ticketBooking.controller;
 
 import com.multiplex.ticketBooking.entity.Hall;
 import com.multiplex.ticketBooking.service.HallServie;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ public class HallController {
     private HallServie hallServie;
 
     @PostMapping("/addHall")
-    public Hall addHall(@RequestBody Hall hall){
+    public Hall addHall(@Valid @RequestBody Hall hall){
         return hallServie.addHall(hall);
     }
 
@@ -29,7 +30,7 @@ public class HallController {
     }
 
     @PutMapping("/updateHall/{id}")
-    public Hall updateHall(@RequestBody Hall hall, @PathVariable Long id) {
+    public Hall updateHall(@Valid @RequestBody Hall hall, @PathVariable Long id) {
         return hallServie.updateHall(hall, id);
     }
 

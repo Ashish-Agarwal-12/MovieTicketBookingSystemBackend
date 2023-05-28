@@ -3,6 +3,7 @@ package com.multiplex.ticketBooking.controller;
 import com.multiplex.ticketBooking.entity.Slot;
 import com.multiplex.ticketBooking.exception.SlotNotFoundException;
 import com.multiplex.ticketBooking.service.SlotService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class SlotController {
     }
 
     @PutMapping("/updateSlots")
-    public Slot updateSlots(@RequestBody Slot slot, @PathVariable Long id) {
+    public Slot updateSlots(@Valid @RequestBody Slot slot, @PathVariable Long id) {
         return slotService.updateSlots(slot, id);
     }
 

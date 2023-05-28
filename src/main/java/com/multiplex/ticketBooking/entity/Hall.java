@@ -1,6 +1,8 @@
 package com.multiplex.ticketBooking.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,13 +19,15 @@ public class Hall {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long hallId;
 
+    @NotBlank(message = "Please Enter a hall Name")
     @Column(nullable = false)
     private String hallName;
 
+    @NotBlank(message = "Please Enter address of the Hall")
     @Column(nullable = false)
     private String address;
 
+    @Size(min = 60, max = 150)
     @Column(nullable = false)
     private Integer totalCapacity;
-
 }

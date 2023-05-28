@@ -4,6 +4,7 @@ import com.multiplex.ticketBooking.entity.Booking;
 import com.multiplex.ticketBooking.entity.Ticket;
 import com.multiplex.ticketBooking.service.BookingService;
 import com.multiplex.ticketBooking.service.TicketService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,7 @@ public class BookingController {
     }
 
     @PostMapping("/addBooking")
-    public Ticket addBooking(@RequestBody Booking booking) {
+    public Ticket addBooking(@Valid @RequestBody Booking booking) {
         Booking savedBooking = bookingService.addBooking(booking);
         if (savedBooking == null){
             return null; //throw new BookingNotConfirmedException
@@ -45,7 +46,7 @@ public class BookingController {
     }
 
     @PutMapping("/updateBooking/{id}")
-    public Booking updateBooking(@RequestBody Booking booking, @PathVariable Long id) {
+    public Booking updateBooking(@Valid @RequestBody Booking booking, @PathVariable Long id) {
         return bookingService.updateBooking(booking, id);
     }
 

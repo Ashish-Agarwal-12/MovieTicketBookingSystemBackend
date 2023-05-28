@@ -4,6 +4,7 @@ import com.multiplex.ticketBooking.entity.User;
 import com.multiplex.ticketBooking.exception.UserNotCreatedException;
 import com.multiplex.ticketBooking.exception.UserNotFoundException;
 import com.multiplex.ticketBooking.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/createUser")
-    public User createUser(@RequestBody User user) throws UserNotCreatedException {
+    public User createUser(@Valid @RequestBody User user) throws UserNotCreatedException {
         User checkUser =  userService.createUser(user);
         if(checkUser == null){
             throw new UserNotCreatedException("Entered User Couldn't be Created");
@@ -38,7 +39,7 @@ public class UserController {
     }
 
     @PutMapping("/updateUserById/{id}")
-    public User updateUserById(@RequestBody User user, @PathVariable Long id) {
+    public User updateUserById(@Valid @RequestBody User user, @PathVariable Long id) {
         return userService.updateUserById(user, id);
     }
 
