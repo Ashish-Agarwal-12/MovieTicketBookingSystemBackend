@@ -1,8 +1,8 @@
 package com.multiplex.ticketBooking.serviceImpl;
 
-import com.multiplex.ticketBooking.entity.Movies;
+
 import com.multiplex.ticketBooking.entity.Slot;
-import com.multiplex.ticketBooking.entity.Hall;
+
 import com.multiplex.ticketBooking.exception.SlotNotFoundException;
 import com.multiplex.ticketBooking.repository.HallRepository;
 import com.multiplex.ticketBooking.repository.MoviesRepository;
@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class slotServiceImpl implements SlotService {

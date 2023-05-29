@@ -30,7 +30,7 @@ public class BookingController {
     }
 
     @PostMapping("/addBooking")
-    public Ticket addBooking(@Valid @RequestBody Booking booking) {
+    public Ticket addBooking(@RequestBody Booking booking) {
         Booking savedBooking = bookingService.addBooking(booking);
         if (savedBooking == null){
             return null; //throw new BookingNotConfirmedException
@@ -50,7 +50,7 @@ public class BookingController {
         return bookingService.updateBooking(booking, id);
     }
 
-    @PutMapping("/cancelbooking/{id}")
+    @PutMapping("/cancelBooking/{id}")
     public void cancelBooking(@PathVariable Long id) {
         bookingService.cancelBooking(id);
     }

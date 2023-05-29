@@ -2,14 +2,14 @@ package com.multiplex.ticketBooking.serviceImpl;
 
 import com.multiplex.ticketBooking.entity.Hall;
 import com.multiplex.ticketBooking.repository.HallRepository;
-import com.multiplex.ticketBooking.service.HallServie;
+import com.multiplex.ticketBooking.service.HallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class hallServiceImpl implements HallServie {
+public class hallServiceImpl implements HallService {
 
     @Autowired
     private HallRepository hallRepository;

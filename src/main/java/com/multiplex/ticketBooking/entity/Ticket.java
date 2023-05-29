@@ -21,7 +21,6 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @Builder
 public class Ticket {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ticketId;

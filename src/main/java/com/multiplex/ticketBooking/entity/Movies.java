@@ -43,7 +43,7 @@ public class Movies {
     @Column(nullable = false)
     private String releaseDate;
 
-    @NotBlank(message = "Please Enter slot numbers")
+//    @NotBlank(message = "Please Enter slot numbers")
     @Size(min = 1, max = 8)
     @OneToMany(cascade = CascadeType.ALL, targetEntity = Slot.class)
     @JoinColumn(referencedColumnName = "movieId")

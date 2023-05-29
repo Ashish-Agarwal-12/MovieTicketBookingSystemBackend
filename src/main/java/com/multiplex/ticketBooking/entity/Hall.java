@@ -27,7 +27,6 @@ public class Hall {
     @Column(nullable = false)
     private String address;
 
-    @Size(min = 60, max = 150)
     @Column(nullable = false)
     private Integer totalCapacity;
 }

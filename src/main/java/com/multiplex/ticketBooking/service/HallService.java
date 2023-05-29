@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public interface HallServie {
+public interface HallService {
     List<Hall> getAllHalls();
 
     Hall getHallById(Long id);

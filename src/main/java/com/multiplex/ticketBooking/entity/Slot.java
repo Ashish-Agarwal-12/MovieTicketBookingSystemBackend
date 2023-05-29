@@ -43,12 +43,10 @@ public class Slot {
     @Column(nullable = false)
     private String duration;
 
-    @Size(min = 60, max = 120)
     @Column(nullable = false)
     private Integer capacity;
 
     @NotBlank(message = "Please Enter the movie Fare")
-    @Min(160)
     @Column(nullable = false)
     private Double amount;
 }
