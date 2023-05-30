@@ -31,7 +31,7 @@ public class Ticket {
     @FutureOrPresent
     private LocalTime startTime;
 
-    @NotBlank(message = "Please Enter the Username")
+
     private String userName;
     private Integer noOfSeats;
     private Double totalAmount;

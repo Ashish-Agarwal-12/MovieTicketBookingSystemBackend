@@ -1,5 +1,6 @@
 package com.multiplex.ticketBooking.handler;
 
+import com.multiplex.ticketBooking.entity.Booking;
 import com.multiplex.ticketBooking.exception.*;
 import com.multiplex.ticketBooking.handlerEntity.ErrorMessage;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,6 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         ErrorMessage errorMessage = new ErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(errorMessage);
-
     }
 
     @ExceptionHandler(UserNotFoundException.class)
@@ -31,6 +31,15 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
                 .body(errorMessage);
 
     }
+
+    @ExceptionHandler(BookingNotConfirmedException.class)
+    public ResponseEntity<ErrorMessage> bookingNotConfirmedException(BookingNotConfirmedException exception, WebRequest webRequest){
+
+        ErrorMessage errorMessage = new ErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(errorMessage);
+    }
+
 
     @ExceptionHandler(MovieNotFoundException.class)
     public ResponseEntity<ErrorMessage> movieNotFoundException(MovieNotFoundException exception, WebRequest webRequest){

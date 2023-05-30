@@ -24,29 +24,20 @@ public class Slot {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long slotId;
 
-    @NotBlank(message = "Please Enter the Corresponding hall where movie needs to be Mapped")
     @ManyToOne
-    @JoinColumn(name = "hall_id",nullable = false)
+    @JoinColumn(name = "hall_id")
     private Hall hall;
 
-    @FutureOrPresent
     @Column(nullable = false)
     private LocalTime startTime;
 
-    @NotBlank(message = "Please Enter the slot date")
     @FutureOrPresent
-    @Column(nullable = false)
     private LocalDate slotDate;
 
-    @NotBlank(message = "Please Enter the Duration of the movie in Minutes.")
-    @Size(min = 90, max = 210)
-    @Column(nullable = false)
     private String duration;
 
     @Column(nullable = false)
     private Integer capacity;
 
-    @NotBlank(message = "Please Enter the movie Fare")
-    @Column(nullable = false)
     private Double amount;
 }

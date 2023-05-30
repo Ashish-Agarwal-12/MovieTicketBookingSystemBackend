@@ -20,11 +20,9 @@ public class Hall {
     private Long hallId;
 
     @NotBlank(message = "Please Enter a hall Name")
-    @Column(nullable = false)
     private String hallName;
 
     @NotBlank(message = "Please Enter address of the Hall")
-    @Column(nullable = false)
     private String address;
 
     @Column(nullable = false)

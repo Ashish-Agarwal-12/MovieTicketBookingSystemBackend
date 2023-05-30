@@ -23,25 +23,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
-    @NotBlank(message = "Please Enter a valid UserName")
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String userName;
 
-    @NotBlank(message = "Please Enter a valid Password that should contain AlphaNumeric Numbers and consists of Special Characters")
     @Size(min = 8, max = 25)
-    @Column(nullable = false)
     private String password;
 
-    @NotBlank(message = "Please mention the userType i.e. User Or Admin")
     private String userType;
 
-    @NotBlank(message = "Please Enter the mobile Number")
-    @Size(min = 10)
-    @Column(nullable = false)
+    @Length(min = 10)
     private String mobileNumber;
 
     @Email
-    @NotBlank(message = "Please Enter a valid Email")
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String emailId;
 }

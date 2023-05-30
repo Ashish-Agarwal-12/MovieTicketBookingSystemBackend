@@ -2,13 +2,13 @@ package com.multiplex.ticketBooking.controller;
 
 import com.multiplex.ticketBooking.entity.Booking;
 import com.multiplex.ticketBooking.entity.Ticket;
+import com.multiplex.ticketBooking.exception.BookingNotConfirmedException;
 import com.multiplex.ticketBooking.service.BookingService;
 import com.multiplex.ticketBooking.service.TicketService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.print.Book;
 import java.util.List;
 
 @RestController
@@ -30,10 +30,10 @@ public class BookingController {
     }
 
     @PostMapping("/addBooking")
-    public Ticket addBooking(@RequestBody Booking booking) {
+    public Ticket addBooking(@Valid @RequestBody Booking booking) throws BookingNotConfirmedException {
         Booking savedBooking = bookingService.addBooking(booking);
         if (savedBooking == null){
-            return null; //throw new BookingNotConfirmedException
+            throw new BookingNotConfirmedException("Booking Cannot Be Confirmed");
         }
 
         Ticket ticket = Ticket.builder()
@@ -54,6 +54,5 @@ public class BookingController {
     public void cancelBooking(@PathVariable Long id) {
         bookingService.cancelBooking(id);
     }
-
 
 }
