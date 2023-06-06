@@ -2,15 +2,12 @@ package com.multiplex.ticketBooking.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
-
-import java.util.Set;
 
 @Entity
 @Data
@@ -27,6 +24,7 @@ public class User {
     private String userName;
 
     @Size(min = 8, max = 25)
+    
     private String password;
 
     private String userType;
