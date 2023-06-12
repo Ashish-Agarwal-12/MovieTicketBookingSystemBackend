@@ -3,6 +3,7 @@ package com.multiplex.ticketBooking.controller;
 import com.multiplex.ticketBooking.entity.User;
 import com.multiplex.ticketBooking.exception.UserNotCreatedException;
 import com.multiplex.ticketBooking.exception.UserNotFoundException;
+import com.multiplex.ticketBooking.repository.UserRepository;
 import com.multiplex.ticketBooking.service.UserService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -20,11 +21,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @PostMapping("/createUser")
     public User createUser(@Valid @RequestBody User user) throws UserNotCreatedException {
         logger.info("Creating user");
         User checkUser =  userService.createUser(user);
-        if(checkUser == null){
+        if(checkUser.getUserId() <= 0){
             logger.error("User not created");
             throw new UserNotCreatedException("Entered User Couldn't be Created");
         }
