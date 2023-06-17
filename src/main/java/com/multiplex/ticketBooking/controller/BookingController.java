@@ -29,7 +29,7 @@ public class BookingController {
         return bookingService.getAllBookings();
     }
 
-    @GetMapping("/bookingById/{id}")
+    @GetMapping("/getBookingById/{id}")
     public Booking getBookingById(@PathVariable Long id) {
         logger.info("Getting booking by Id");
         return bookingService.getBookingById(id);

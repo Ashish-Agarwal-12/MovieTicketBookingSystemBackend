@@ -2,11 +2,15 @@ package com.multiplex.ticketBooking.controller;
 
 
 import com.multiplex.ticketBooking.entity.Hall;
+import com.multiplex.ticketBooking.payLoads.HallPostResponse;
 import com.multiplex.ticketBooking.service.HallService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,9 +31,12 @@ public class HallController {
 
     @CrossOrigin(origins = "http://localhost:3000", methods = RequestMethod.GET)
     @GetMapping("/getAllHalls")
-    public List<Hall> getAllHalls() {
+    public ResponseEntity<HallPostResponse> getAllHalls(
+            @RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize) {
         logger.info("Retrieving all Halls");
-        return hallService.getAllHalls();
+        HallPostResponse hallPostResponse = hallService.getAllHalls(pageNumber, pageSize);
+        return new ResponseEntity<HallPostResponse>(hallPostResponse, HttpStatus.OK);
     }
 
     @CrossOrigin(origins = "http://localhost:3000", methods = RequestMethod.GET)
@@ -48,8 +55,9 @@ public class HallController {
 
     @CrossOrigin(origins = "http://localhost:3000", methods = RequestMethod.DELETE)
     @DeleteMapping("/deleteHall/{id}")
-    public void deleteHall(@PathVariable Long id) {
+    public String deleteHall(@PathVariable Long id) {
         logger.info("Deleting the hall");
         hallService.deleteHall(id);
+        return "Deleted Successfully";
     }
 }

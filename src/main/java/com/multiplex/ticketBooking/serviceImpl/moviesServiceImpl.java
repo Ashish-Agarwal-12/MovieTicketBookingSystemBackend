@@ -7,6 +7,9 @@ import com.multiplex.ticketBooking.repository.HallRepository;
 import com.multiplex.ticketBooking.repository.MoviesRepository;
 import com.multiplex.ticketBooking.service.MoviesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,8 +34,10 @@ public class moviesServiceImpl implements MoviesService {
     }
 
     @Override
-    public List<Movies> getAllMovies() {
-        return moviesRepository.findAll();
+    public List<Movies> getAllMovies(Integer pageNumber, Integer pageSize) {
+        Pageable p = PageRequest.of(pageNumber, pageSize);
+        Page<Movies> moviesPage = moviesRepository.findAll(p);
+        return moviesPage.getContent();
     }
 
     @Override

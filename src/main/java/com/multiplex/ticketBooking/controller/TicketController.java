@@ -20,7 +20,7 @@ public class TicketController {
     @Autowired
     private TicketService ticketService;
 
-    @GetMapping("/getAllTicketsByUserName")
+    @GetMapping("/getAllTicketsByUserName/{userName}")
     public List<Ticket> getAllTicketsByUserName(@Valid @RequestParam("userName") String userName){
         logger.info("Getting all tickets");
         List<Ticket> tickets = ticketService.getAllTicketsByUserName(userName);
@@ -32,7 +32,7 @@ public class TicketController {
         return tickets;
     }
 
-    @GetMapping("/getTicketById")
+    @GetMapping("/getTicketById/{ticketId}")
     public Ticket getAllTicketsById(@PathVariable Long ticketId){
         logger.info("Getting all tickets");
         Ticket ticket = ticketService.getAllTicketsById(ticketId);

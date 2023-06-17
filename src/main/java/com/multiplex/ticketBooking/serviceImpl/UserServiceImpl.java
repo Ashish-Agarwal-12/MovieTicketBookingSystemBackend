@@ -4,6 +4,9 @@ import com.multiplex.ticketBooking.entity.User;
 import com.multiplex.ticketBooking.repository.UserRepository;
 import com.multiplex.ticketBooking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +18,10 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<User> getAllUsers(Integer pageNumber, Integer pageSize) {
+        Pageable p = PageRequest.of(pageNumber, pageSize);
+        Page<User> userPage = userRepository.findAll(p);
+        return userPage.getContent();
     }
 
     @Override

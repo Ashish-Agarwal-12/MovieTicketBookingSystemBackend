@@ -8,6 +8,8 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,10 +33,13 @@ public class MoviesController {
     }
 
     @GetMapping("/getAllMovies")
-    public List<Movies> getAllMovies() {
-
+    public ResponseEntity<List<Movies>> getAllMovies(
+            @RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize
+    ) {
         logger.info("Getting all movie");
-        return moviesService.getAllMovies();
+        List<Movies> moviesList =  moviesService.getAllMovies(pageNumber, pageSize);
+        return new ResponseEntity<List<Movies>>(moviesList, HttpStatus.OK);
     }
 
     @GetMapping("/getMovieById/{id}")

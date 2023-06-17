@@ -9,7 +9,7 @@ import java.util.List;
 public interface MoviesService {
     Movies addMovie(Movies movie);
 
-    List<Movies> getAllMovies();
+    List<Movies> getAllMovies(Integer pageNumber, Integer pageSize);
 
     Movies getMovieById(Long id);
 

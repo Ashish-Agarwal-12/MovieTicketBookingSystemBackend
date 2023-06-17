@@ -1,10 +1,7 @@
 package com.multiplex.ticketBooking.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,16 +25,19 @@ public class Slot {
     @JoinColumn(name = "hall_id")
     private Hall hall;
 
-    @Column(nullable = false)
+    @Column(unique = true)
+    @NotNull(message = "Please Enter the Slot Time")
     private LocalTime startTime;
 
-    @FutureOrPresent
+    @NotNull(message = "Please Enter the Slot Date")
     private LocalDate slotDate;
 
+    @NotEmpty(message = "Please Enter the duration of the movie")
     private String duration;
 
-    @Column(nullable = false)
+    @NotNull(message = "Please Enter the total Capacity")
     private Integer capacity;
 
+    @NotNull(message = "Please Enter the amount")
     private Double amount;
 }
