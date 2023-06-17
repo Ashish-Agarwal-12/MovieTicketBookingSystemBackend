@@ -1,9 +1,13 @@
 package com.multiplex.ticketBooking.serviceImpl;
 
 import com.multiplex.ticketBooking.entity.Hall;
+import com.multiplex.ticketBooking.payLoads.HallPostResponse;
 import com.multiplex.ticketBooking.repository.HallRepository;
 import com.multiplex.ticketBooking.service.HallService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +18,18 @@ public class hallServiceImpl implements HallService {
     @Autowired
     private HallRepository hallRepository;
     @Override
-    public List<Hall> getAllHalls() {
-        return hallRepository.findAll();
+    public HallPostResponse getAllHalls(Integer pageNumber, Integer pageSize) {
+        Pageable p = PageRequest.of(pageNumber, pageSize);
+        Page<Hall> hallPage = hallRepository.findAll(p);
+        List<Hall> hallList= hallPage.getContent();
+        HallPostResponse hallPostResponse = new HallPostResponse();
+        hallPostResponse.setContent(hallList);
+        hallPostResponse.setPageNumber(hallPage.getNumber());
+        hallPostResponse.setPageSize(hallPage.getSize());
+        hallPostResponse.setTotalElements(hallPage.getTotalElements());
+        hallPostResponse.setTotalPage(hallPage.getTotalPages());
+        hallPostResponse.setLastPage(hallPage.isLast());
+        return  hallPostResponse;
     }
 
     @Override

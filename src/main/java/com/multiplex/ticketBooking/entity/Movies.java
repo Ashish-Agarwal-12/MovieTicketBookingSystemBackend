@@ -22,18 +22,23 @@ public class Movies {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long movieId;
 
+    @NotEmpty(message = "Please Enter the movie title")
+    @Column(unique = true)
     private String title;
 
+    @NotEmpty(message = "Please Enter the description of the movie")
     private String description;
 
-
+    @NotEmpty(message = "Please Provide the genre")
     private String genre;
 
+    @NotNull(message = "Please Enter the Duration")
     private Integer duration;
 
+    @FutureOrPresent
+    @NotNull(message = "Please Enter the release date for the movie")
     private LocalDate releaseDate;
 
-    @Size(min = 1, max = 6)
     @OneToMany(cascade = CascadeType.ALL, targetEntity = Slot.class)
     @JoinColumn(referencedColumnName = "movieId")
     private List<Slot> slots;

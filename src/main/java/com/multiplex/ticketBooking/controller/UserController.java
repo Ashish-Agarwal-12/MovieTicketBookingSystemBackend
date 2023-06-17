@@ -9,6 +9,9 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,9 +41,13 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:3000", methods = RequestMethod.GET)
     @GetMapping("/getAllUsers")
-    public List<User> getAllUser() {
+    public ResponseEntity<List<User>> getAllUser(
+            @RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
+            @RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize
+    ) {
         logger.info("Getting all users");
-        return userService.getAllUsers();
+        List<User> userList =  userService.getAllUsers(pageNumber, pageSize);
+        return new ResponseEntity<List<User>>(userList, HttpStatus.OK);
     }
 
     @CrossOrigin(origins = "http://localhost:3000", methods = RequestMethod.GET)

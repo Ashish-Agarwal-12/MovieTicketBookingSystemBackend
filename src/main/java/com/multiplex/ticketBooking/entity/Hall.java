@@ -2,11 +2,14 @@ package com.multiplex.ticketBooking.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Data
@@ -19,12 +22,14 @@ public class Hall {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long hallId;
 
-    @NotBlank(message = "Please Enter a hall Name")
+    @Column(unique = true)
+    @NotEmpty(message = "Please Enter the hall Name")
+    @Length(min = 3)
     private String hallName;
 
-    @NotBlank(message = "Please Enter address of the Hall")
+    @NotEmpty(message = "Please Enter address of the Hall")
     private String address;
 
-    @Column(nullable = false)
+    @NotNull
     private Integer totalCapacity;
 }

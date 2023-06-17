@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 public interface UserService {
-    List<User> getAllUsers();
+    List<User> getAllUsers(Integer pageNumber, Integer pageSize);
 
     User getUserById(Long id);
 
