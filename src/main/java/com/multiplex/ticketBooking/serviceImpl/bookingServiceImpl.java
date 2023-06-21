@@ -46,12 +46,8 @@ public class bookingServiceImpl implements BookingService {
         }
         booking.setStatus("Confirmed");
         Booking savedBooking = bookingRepository.save(booking);
-        if (savedBooking == null){
-            return null;//throw new Exception
-        }
         //updating the number of seats left for a slot after booking
         savedBooking.getSlot().setCapacity(savedBooking.getSlot().getCapacity() - savedBooking.getNoOfSeats());
-
         slotRepository.save(savedBooking.getSlot());
         return savedBooking;
     }
@@ -59,14 +55,13 @@ public class bookingServiceImpl implements BookingService {
     @Override
     public Booking updateBooking(Booking booking, Long id) {
         Booking oldBooking = bookingRepository.findById(id).get();
-
         if(oldBooking.getStatus() != booking.getStatus()) {
             oldBooking.setStatus(booking.getStatus());
         }
         if(oldBooking.getBookingDate() != booking.getBookingDate()) {
             oldBooking.setBookingDate(booking.getBookingDate());
         }
-        booking.setBookingDate(LocalDate.now());
+//        booking.setBookingDate(LocalDate.now());
         return bookingRepository.save(oldBooking);
     }
 
@@ -83,5 +78,6 @@ public class bookingServiceImpl implements BookingService {
         slot.setCapacity(slot.getCapacity() + booking.get().getNoOfSeats());
         slotRepository.save(slot);
     }
+
 
 }

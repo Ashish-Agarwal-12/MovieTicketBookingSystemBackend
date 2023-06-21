@@ -7,13 +7,13 @@ import java.util.List;
 
 @Service
 public interface UserService {
-    List<User> getAllUsers(Integer pageNumber, Integer pageSize);
+    List<User> getAllUsers();
 
     User getUserById(Long id);
 
     User createUser(User user);
 
-    void deleteUserById(Long id);
+    String deleteUserById(Long id);
 
     User updateUserById(User user, Long id);
 }

@@ -9,11 +9,11 @@ import java.util.List;
 public interface MoviesService {
     Movies addMovie(Movies movie);
 
-    List<Movies> getAllMovies(Integer pageNumber, Integer pageSize);
+    List<Movies> getAllMovies();
 
     Movies getMovieById(Long id);
 
-    void deleteMovie(Long id);
+    String deleteMovie(Long id);
 
     Movies updateMovie(Movies movie, Long id);
 

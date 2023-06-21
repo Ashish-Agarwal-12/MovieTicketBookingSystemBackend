@@ -34,10 +34,9 @@ public class moviesServiceImpl implements MoviesService {
     }
 
     @Override
-    public List<Movies> getAllMovies(Integer pageNumber, Integer pageSize) {
-        Pageable p = PageRequest.of(pageNumber, pageSize);
-        Page<Movies> moviesPage = moviesRepository.findAll(p);
-        return moviesPage.getContent();
+    public List<Movies> getAllMovies() {
+
+        return moviesRepository.findAll();
     }
 
     @Override
@@ -46,8 +45,9 @@ public class moviesServiceImpl implements MoviesService {
     }
 
     @Override
-    public void deleteMovie(Long id) {
+    public String deleteMovie(Long id) {
         moviesRepository.deleteById(id);
+        return "Deleted Successfully";
     }
 
     @Override

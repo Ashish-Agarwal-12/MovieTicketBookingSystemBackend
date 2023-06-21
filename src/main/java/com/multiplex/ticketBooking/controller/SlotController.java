@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 public class SlotController {
     public static final Logger logger = LoggerFactory.getLogger(BookingController.class);
     @Autowired
@@ -29,7 +30,7 @@ public class SlotController {
         return slotService.getSlotsById(id);
     }
 
-    @PutMapping("/updateSlots")
+    @PutMapping("/updateSlots/{id}")
     public Slot updateSlots(@Valid @RequestBody Slot slot, @PathVariable Long id) {
         logger.info("Updating slots");
         return slotService.updateSlots(slot, id);

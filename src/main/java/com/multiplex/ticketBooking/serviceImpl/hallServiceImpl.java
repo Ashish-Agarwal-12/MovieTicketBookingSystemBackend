@@ -52,7 +52,8 @@ public class hallServiceImpl implements HallService {
     }
 
     @Override
-    public void deleteHall(Long id) {
+    public String deleteHall(Long id) {
         hallRepository.deleteById(id);
+        return "Deleted Successfully";
     }
 }

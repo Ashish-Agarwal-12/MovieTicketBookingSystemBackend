@@ -16,5 +16,5 @@ public interface HallService {
 
     Hall addHall(Hall hall);
 
-    void deleteHall(Long id);
+    String deleteHall(Long id);
 }

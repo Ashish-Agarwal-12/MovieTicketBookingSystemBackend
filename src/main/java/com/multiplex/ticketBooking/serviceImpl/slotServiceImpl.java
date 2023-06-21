@@ -31,10 +31,7 @@ public class slotServiceImpl implements SlotService {
 
     @Override
     public Slot getSlotsById(Long id) throws SlotNotFoundException {
-        Slot checkSlot =  slotRepository.findById(id).get();
-        if(checkSlot == null) {
-            throw new SlotNotFoundException("No such slot mapped through this ID");
-        }
+        Slot checkSlot =  slotRepository.findById(id).orElseThrow(() -> new SlotNotFoundException("No such slot mapped through this ID: " + id));;
         return checkSlot;
     }
 
@@ -54,6 +51,15 @@ public class slotServiceImpl implements SlotService {
         }
         if(oldSlot.getStartTime() != slot.getStartTime()) {
             oldSlot.setStartTime(slot.getStartTime());
+        }
+        if(oldSlot.getAmount() != slot.getAmount()) {
+            oldSlot.setAmount(slot.getAmount());
+        }
+        if(oldSlot.getDuration() != slot.getDuration()) {
+            oldSlot.setDuration(slot.getDuration());
+        }
+        if(oldSlot.getSlotDate() != slot.getSlotDate()) {
+            oldSlot.setSlotDate(slot.getSlotDate());
         }
         return slotRepository.save(oldSlot);
     }

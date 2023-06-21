@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 public class MoviesController {
 
     public static final Logger logger = LoggerFactory.getLogger(MoviesController.class);
@@ -33,12 +34,9 @@ public class MoviesController {
     }
 
     @GetMapping("/getAllMovies")
-    public ResponseEntity<List<Movies>> getAllMovies(
-            @RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
-            @RequestParam(value = "pageSize", defaultValue = "10", required = false) Integer pageSize
-    ) {
+    public ResponseEntity<List<Movies>> getAllMovies() {
         logger.info("Getting all movie");
-        List<Movies> moviesList =  moviesService.getAllMovies(pageNumber, pageSize);
+        List<Movies> moviesList =  moviesService.getAllMovies();
         return new ResponseEntity<List<Movies>>(moviesList, HttpStatus.OK);
     }
 
@@ -57,10 +55,11 @@ public class MoviesController {
     }
 
     @DeleteMapping("/deleteMovie/{id}")
-    public void deleteMovie(@PathVariable Long id) {
+    public String deleteMovie(@PathVariable Long id) {
 
         logger.info("Deleting movie");
         moviesService.deleteMovie(id);
+        return "Deleted Successfully";
     }
 
     @GetMapping("/searchMovieByName")

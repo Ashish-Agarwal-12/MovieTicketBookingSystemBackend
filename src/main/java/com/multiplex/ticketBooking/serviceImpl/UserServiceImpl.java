@@ -18,10 +18,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public List<User> getAllUsers(Integer pageNumber, Integer pageSize) {
-        Pageable p = PageRequest.of(pageNumber, pageSize);
-        Page<User> userPage = userRepository.findAll(p);
-        return userPage.getContent();
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     @Override
@@ -35,8 +33,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUserById(Long id) {
+    public String deleteUserById(Long id) {
         userRepository.deleteById(id);
+        return "Deleted Successfully";
     }
 
     @Override
