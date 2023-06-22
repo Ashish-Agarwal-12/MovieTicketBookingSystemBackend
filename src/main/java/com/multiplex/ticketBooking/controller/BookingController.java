@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 public class BookingController {
 
     public static final Logger logger = LoggerFactory.getLogger(BookingController.class);

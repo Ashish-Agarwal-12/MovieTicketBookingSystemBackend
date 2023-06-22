@@ -35,7 +35,6 @@ public class Movies {
     @NotNull(message = "Please Enter the Duration")
     private Integer duration;
 
-    @FutureOrPresent
     @NotNull(message = "Please Enter the release date for the movie")
     private LocalDate releaseDate;
 

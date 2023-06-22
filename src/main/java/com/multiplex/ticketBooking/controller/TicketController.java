@@ -6,42 +6,36 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 public class TicketController {
 
     public static final Logger logger = LoggerFactory.getLogger(BookingController.class);
     @Autowired
     private TicketService ticketService;
 
-    @GetMapping("/getAllTicketsByUserName/{userName}")
-    public List<Ticket> getAllTicketsByUserName(@Valid @RequestParam("userName") String userName){
-        logger.info("Getting all tickets");
-        List<Ticket> tickets = ticketService.getAllTicketsByUserName(userName);
-        if (tickets.isEmpty()){
-            logger.error("No such ticket found");
-            return null;
-        }
-        logger.info("Getting all tickets");
-        return tickets;
-    }
-
     @GetMapping("/getTicketById/{ticketId}")
-    public Ticket getAllTicketsById(@PathVariable Long ticketId){
+    public Ticket getTicketById(@PathVariable Long ticketId){
         logger.info("Getting all tickets");
-        Ticket ticket = ticketService.getAllTicketsById(ticketId);
+        Ticket ticket = ticketService.getTicketById(ticketId);
         if (ticket == null){
             logger.info("No tickets found");
             return null;
         }
         logger.info("Getting all tickets");
         return ticket;
+    }
+    @GetMapping("/getAllTickets")
+    public ResponseEntity<List<Ticket>> getAllTickets() {
+        logger.info("Retrieving ticket");
+        List<Ticket> tickets = ticketService.getAllTickets();
+        return new ResponseEntity<List<Ticket>>(tickets, HttpStatus.OK);
     }
 
 }

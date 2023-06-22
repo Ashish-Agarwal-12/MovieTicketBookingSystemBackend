@@ -31,12 +31,10 @@ public class HallController {
 
     @CrossOrigin(origins = "http://localhost:3000", methods = RequestMethod.GET)
     @GetMapping("/getAllHalls")
-    public ResponseEntity<HallPostResponse> getAllHalls(
-            @RequestParam(value = "pageNumber", defaultValue = "0", required = false) Integer pageNumber,
-            @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize) {
+    public ResponseEntity<List<Hall>> getAllHalls() {
         logger.info("Retrieving all Halls");
-        HallPostResponse hallPostResponse = hallService.getAllHalls(pageNumber, pageSize);
-        return new ResponseEntity<HallPostResponse>(hallPostResponse, HttpStatus.OK);
+        List<Hall> hallList = hallService.getAllHalls();
+        return new ResponseEntity<List<Hall>>(hallList, HttpStatus.OK);
     }
 
     @CrossOrigin(origins = "http://localhost:3000", methods = RequestMethod.GET)

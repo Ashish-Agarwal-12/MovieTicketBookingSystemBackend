@@ -1,10 +1,7 @@
 package com.multiplex.ticketBooking.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,12 +21,13 @@ public class Hall {
 
     @Column(unique = true)
     @NotEmpty(message = "Please Enter the hall Name")
-    @Length(min = 3)
+    @Length(min = 3,message = "The Name of the Hall should be unique")
     private String hallName;
 
     @NotEmpty(message = "Please Enter address of the Hall")
     private String address;
 
-    @NotNull
+    @NotNull(message = "It should not be zero")
+    @Min(value = 60, message = "Minimum Capacity Should be 60")
     private Integer totalCapacity;
 }

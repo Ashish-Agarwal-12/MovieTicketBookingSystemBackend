@@ -18,13 +18,14 @@ public class TicketServiceImpl implements TicketService {
         return ticketRepository.save(ticket);
     }
 
+
     @Override
-    public List<Ticket> getAllTicketsByUserName(String userName) {
-        return ticketRepository.findAllByUserName(userName);
+    public Ticket getTicketById(Long ticketId) {
+        return ticketRepository.findById(ticketId).get();
     }
 
     @Override
-    public Ticket getAllTicketsById(Long ticketId) {
-        return ticketRepository.findById(ticketId).get();
+    public List<Ticket> getAllTickets() {
+        return ticketRepository.findAll();
     }
 }

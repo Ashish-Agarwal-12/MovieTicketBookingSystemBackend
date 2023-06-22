@@ -18,18 +18,8 @@ public class hallServiceImpl implements HallService {
     @Autowired
     private HallRepository hallRepository;
     @Override
-    public HallPostResponse getAllHalls(Integer pageNumber, Integer pageSize) {
-        Pageable p = PageRequest.of(pageNumber, pageSize);
-        Page<Hall> hallPage = hallRepository.findAll(p);
-        List<Hall> hallList= hallPage.getContent();
-        HallPostResponse hallPostResponse = new HallPostResponse();
-        hallPostResponse.setContent(hallList);
-        hallPostResponse.setPageNumber(hallPage.getNumber());
-        hallPostResponse.setPageSize(hallPage.getSize());
-        hallPostResponse.setTotalElements(hallPage.getTotalElements());
-        hallPostResponse.setTotalPage(hallPage.getTotalPages());
-        hallPostResponse.setLastPage(hallPage.isLast());
-        return  hallPostResponse;
+    public List<Hall> getAllHalls() {
+        return hallRepository.findAll();
     }
 
     @Override
@@ -42,6 +32,12 @@ public class hallServiceImpl implements HallService {
         Hall oldHall = hallRepository.findById(id).get();
         if(oldHall.getTotalCapacity() != hall.getTotalCapacity()) {
             oldHall.setTotalCapacity(hall.getTotalCapacity());
+        }
+        if(oldHall.getHallName() != hall.getHallName()){
+            oldHall.setHallName(hall.getHallName());
+        }
+        if(oldHall.getAddress() != hall.getAddress()) {
+            oldHall.setAddress(hall.getAddress());
         }
         return hallRepository.save(oldHall);
     }

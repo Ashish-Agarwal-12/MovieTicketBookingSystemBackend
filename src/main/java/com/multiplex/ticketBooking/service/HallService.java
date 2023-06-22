@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public interface HallService {
-    HallPostResponse getAllHalls(Integer pageNumber, Integer pageSize);
+    List<Hall> getAllHalls();
 
     Hall getHallById(Long id);
 

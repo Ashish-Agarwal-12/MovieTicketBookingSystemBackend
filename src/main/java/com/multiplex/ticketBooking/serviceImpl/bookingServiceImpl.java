@@ -61,7 +61,7 @@ public class bookingServiceImpl implements BookingService {
         if(oldBooking.getBookingDate() != booking.getBookingDate()) {
             oldBooking.setBookingDate(booking.getBookingDate());
         }
-//        booking.setBookingDate(LocalDate.now());
+
         return bookingRepository.save(oldBooking);
     }
 
