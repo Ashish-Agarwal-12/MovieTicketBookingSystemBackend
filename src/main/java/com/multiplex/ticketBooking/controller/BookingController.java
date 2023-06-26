@@ -30,6 +30,11 @@ public class BookingController {
         return bookingService.getAllBookings();
     }
 
+    @GetMapping("/getBooking/{id}")
+    public  List<Booking> getBookingByUserId(@PathVariable Long id) {
+        logger.info("Fetching List of Bookings by user Id");
+        return bookingService.getBookingByUserId(id);
+    }
     @GetMapping("/getBookingById/{id}")
     public Booking getBookingById(@PathVariable Long id) {
         logger.info("Getting booking by Id");

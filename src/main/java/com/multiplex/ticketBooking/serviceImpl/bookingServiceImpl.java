@@ -79,5 +79,8 @@ public class bookingServiceImpl implements BookingService {
         slotRepository.save(slot);
     }
 
-
+    @Override
+    public List<Booking> getBookingByUserId(Long id) {
+        return bookingRepository.findAllByUserUserId(id);
+    }
 }

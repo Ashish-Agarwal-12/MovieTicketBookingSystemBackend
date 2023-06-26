@@ -8,7 +8,6 @@ import java.util.List;
 @Service
 public interface BookingService {
     List<Booking> getAllBookings();
-
     Booking getBookingById(Long id);
 
     Booking addBooking(Booking booking);
@@ -16,4 +15,6 @@ public interface BookingService {
     Booking updateBooking(Booking booking, Long id);
 
     void cancelBooking(Long id);
+
+    List<Booking> getBookingByUserId(Long id);
 }

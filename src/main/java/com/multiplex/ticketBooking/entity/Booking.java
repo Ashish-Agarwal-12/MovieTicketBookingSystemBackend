@@ -29,7 +29,6 @@ public class Booking {
     private User user;
 
     @NotNull(message = "Please Enter the booking Date")
-    @FutureOrPresent
     private LocalDate bookingDate;
 
     private String status;

@@ -41,4 +41,7 @@ public class Movies {
     @OneToMany(cascade = CascadeType.ALL, targetEntity = Slot.class)
     @JoinColumn(referencedColumnName = "movieId")
     private List<Slot> slots;
+
+    @NotBlank(message = "Please Enter the Image URL")
+    private String imageUrl;
 }
